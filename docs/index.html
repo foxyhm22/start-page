@@ -3,7 +3,7 @@
 <html id="html" data-theme="default">
 <head>
 	<meta charset="utf-8">
-	<title>~</title>
+	<title>New Tab</title>
 	<link rel="stylesheet" style="text/css" href="general.css" />
 </head>
 <body>
@@ -18,42 +18,16 @@
 		</div>
 		<br>
 
-		<div style="text-align:center">
-			<span class="reqdVar" onclick="currentSlide(1)"></span>
-			<span class="reqdVar" onclick="currentSlide(2)"></span>
-			<span class="reqdVar" onclick="currentSlide(3)"></span>
-			<span class="reqdVar" onclick="currentSlide(4)"></span>
-			<span class="reqdVar" onclick="currentSlide(5)"></span>
-			<span class="reqdVar" onclick="currentSlide(6)"></span>
-			<span class="reqdVar" onclick="currentSlide(7)"></span>
-			<span class="reqdVar" onclick="currentSlide(8)"></span>
-			<span class="reqdVar" onclick="currentSlide(9)"></span>
-			<span class="reqdVar" onclick="currentSlide(10)"></span>
-			<span class="reqdVar" onclick="currentSlide(11)"></span>
-			<span class="reqdVar" onclick="currentSlide(12)"></span>
-			<span class="reqdVar" onclick="currentSlide(13)"></span>
-			<span class="reqdVar" onclick="currentSlide(14)"></span>
-			<span class="reqdVar" onclick="currentSlide(15)"></span>
-			<span class="reqdVar" onclick="currentSlide(16)"></span>
-			<span class="reqdVar" onclick="currentSlide(17)"></span>
-			<span class="reqdVar" onclick="currentSlide(18)"></span>
-			<span class="reqdVar" onclick="currentSlide(19)"></span>
-			<span class="reqdVar" onclick="currentSlide(20)"></span>
-			<span class="reqdVar" onclick="currentSlide(21)"></span>
-			<span class="reqdVar" onclick="currentSlide(22)"></span>
-			<span class="reqdVar" onclick="currentSlide(23)"></span>
-		</div>
-
 		<header>
 			<br>
-			<h1>Hello, <span class="flair">Mhmd Ali</span></h1>
+			<h1 ><span id="greet">Hello</span>, <span class="flair">Mhmd Ali</span></h1>
 		</header>
 
 		<nav>
 			<br>
 
 			<ul class="green">
-				<a style="font-size:22px">Design</a>
+				<li style="font-size:22px">Design</li>
 				<li><a href="https://behance.com/">Behance</a></li>
 				<li><a href="https://dribbble.com/">Dribbble</a></li>
 				<li><a href="https://www.awwwards.com/">Awwwards</a></li>
@@ -63,7 +37,7 @@
 			</ul>
 
 			<ul class="red">
-				<a style="font-size:22px">Tech</a>
+				<li style="font-size:22px">Tech</li>
 				<li><a href="https://dev.to/">dev.to</a></li>
 				<li><a href="https://app.daily.dev/">daily.dev</a></li>
 				<li><a href="https://www.producthunt.com">producthunt</a></li>
@@ -73,7 +47,7 @@
 			</ul>
 
 			<ul class="blue">
-				<a style="font-size:22px">Social</a>
+				<li style="font-size:22px">Social</li>
 				<li><a href="https://www.youtube.com">Youtube</a></li>
 				<li><a href="https://github.com/">Github</a></li>
 				<li><a href="https://linkedin.com/">LinkedIn</a></li>
@@ -83,18 +57,32 @@
 			</ul>
 
 			<ul class="yellow">
-				<a style="font-size:22px">Else</a>
-				<li><a href="https://mail.google.com">gmail</a></li>
-				<li><a href="https://figma.com">figma</a></li>
-				<li><a href="https://temp-mail.com/">temp mail</a></li>
-				<li><a href="https://monkeytype.com/">monkeytype</a></li>
-				<li><a href="https://keep.google.com">google keep</a></li>
-				<li><a href="https://soundcloud.com/">soundcloud</a></li>
+				<li style="font-size:22px">Else</li>
+				<li><a href="https://mail.google.com">Gmail</a></li>
+				<li><a href="https://figma.com">Figma</a></li>
+				<li><a href="https://temp-mail.com/">Temp Mail</a></li>
+				<li><a href="https://monkeytype.com/">Monkeytype</a></li>
+				<li><a href="https://keep.google.com">Google Keep</a></li>
+				<li><a href="https://soundcloud.com/">Soundcloud</a></li>
 			</ul>
 		</nav>
 
 		<div class="codes" id="codes">
 			<script>
+				function greeting(hour) {
+					var greetingText;
+					if (hour >= 5 && hour <= 11) {
+						greetingText = "Good Morning";
+					} else if (hour >= 12 && hour <= 16) {
+						greetingText = "Good Afternoon";
+					} else if ((hour >= 17 && hour <= 23) || (hour >= 0 && hour <= 4)) {
+						greetingText = "Good Evening";
+					} else {
+						greetingText = "Hello";
+					}
+					return greetingText;
+				}
+
 			//document.getElementById("main").innerHTML = Date();
 			function updateClock() {
 				var days = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
@@ -110,6 +98,7 @@
 
 				// set the content of the element with the ID codes to the formatted string
 				document.getElementById('codes').innerHTML = dateString;
+				document.getElementById('greet').innerText = greeting(m.getHours());
 
 				// call this function again in 1000ms
 				setTimeout(updateClock, 1000);
@@ -129,34 +118,29 @@
 				console.log(localStorage.getItem('slideIndex'));
 			}
 
-			// Thumbnail image controls
-			function currentSlides(n) {
-				showSlides(slideIndex = n);
-				localStorage.setItem('slideIndex', slideIndex);
-				console.log(localStorage.getItem('slideIndex'));
-			}
-
 			// Show slides
 			function showSlides(n) {
 				var i;
 				var slide = document.querySelector(".mySlides");
-				var reqdVars = document.getElementsByClassName("reqdVar");
+				var reqdVars = document.querySelector(".reqdVar");
 				if (n > 23) {
 					slideIndex = 1;
 				}
 				if (n < 1) {
 					slideIndex = 23;
-				}				for (i = 0; i < reqdVars.length; i++) {
-					reqdVars[i].className = reqdVars[i].className.replace(" active", "");
-				}
+				}				
 				slide.querySelector("img").src = `img/side${slideIndex}.gif`
-				reqdVars[slideIndex-1].className += " active";
 				console.log(slideIndex)
 			}
 
+			// Theming
 			const html = document.getElementById("html");
+
+			// Themes list
 			const colorchemes = ["default", "gruvbox", "nord"];
+
 			let changeTheme = (e) => {
+				// Change theme key
 				if (e.key == "c") {
 					let currentThemeIndex = colorchemes.findIndex(color => color === html.dataset.theme );
 					currentThemeIndex = (currentThemeIndex >= colorchemes.length - 1) ? 0 : currentThemeIndex + 1 ;
@@ -165,6 +149,7 @@
 
 					let havematched = true;
 
+					// Select slide for every theme by theme index.
 					switch (currentThemeIndex) {
 						case 0:
 						slideIndex= 1;
