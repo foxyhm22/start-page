@@ -83,6 +83,8 @@
 					return greetingText;
 				}
 
+			document.getElementById('greet').innerText = greeting((new Date()).getHours());
+
 			//document.getElementById("main").innerHTML = Date();
 			function updateClock() {
 				var days = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
@@ -98,7 +100,6 @@
 
 				// set the content of the element with the ID codes to the formatted string
 				document.getElementById('codes').innerHTML = dateString;
-				document.getElementById('greet').innerText = greeting(m.getHours());
 
 				// call this function again in 1000ms
 				setTimeout(updateClock, 1000);
